@@ -10,7 +10,7 @@ import UpdateUserDto from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import CreateLocalUserDto from './dto/create-local.user.dto';
 import { UtilsService } from 'src/utils/utils.service';
-import { where } from 'sequelize';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -48,6 +48,9 @@ export class UserService {
       if (!otp) {
         throw new BadRequestException('Otp not created.');
       }
+      const pass = body.password;
+      const hashedPassword = await bcrypt.hash(pass, 10);
+      body.password = hashedPassword;
       await this.userModel.create({ ...body });
       await this.utilsService.sendOtptoMail(body.email, otp);
       console.log();
