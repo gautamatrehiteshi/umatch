@@ -1,5 +1,5 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-export class CreateLocalUserDto {
+import { IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
+export default class CreateLocalUserDto {
   @IsString()
   @IsNotEmpty()
   public firstName: string;
@@ -11,12 +11,13 @@ export class CreateLocalUserDto {
   public email: string;
   @IsString()
   @IsNotEmpty()
+  @IsStrongPassword()
   public password: string;
   @IsString()
   @IsNotEmpty()
   public loginType: string;
-  @IsString()
-  @IsOptional()
-  @IsEnum(['artist', 'group', 'label', 'manager', 'admin', 'influencer'])
-  public usertype: string;
+  // @IsString()
+  // @IsOptional()
+  // @IsEnum(['artist', 'group', 'label', 'manager', 'admin', 'influencer'])
+  // public usertype: string;
 }

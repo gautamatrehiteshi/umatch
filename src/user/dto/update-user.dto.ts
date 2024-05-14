@@ -1,6 +1,6 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsOptional, IsString } from 'class-validator';
 
-export class UpdateUserDto {
+export default class UpdateUserDto {
   @IsString()
   @IsOptional()
   public firstName: string;

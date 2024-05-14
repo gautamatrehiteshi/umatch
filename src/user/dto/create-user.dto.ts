@@ -1,5 +1,5 @@
 import { IsBoolean, IsEnum, IsNotEmpty, IsString } from 'class-validator';
-export class CreateUserDto {
+export default class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   public firstName: string;

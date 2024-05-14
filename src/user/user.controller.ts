@@ -8,9 +8,9 @@ import {
   Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { CreateLocalUserDto } from './dto/create-local.user.dto';
+import CreateUserDto from './dto/create-user.dto';
+import UpdateUserDto from './dto/update-user.dto';
+import CreateLocalUserDto from './dto/create-local.user.dto';
 
 @Controller('user')
 export class UserController {
@@ -20,10 +20,20 @@ export class UserController {
   create(@Body() body: CreateUserDto) {
     return this.userService.create(body);
   }
-  @Post()
+  @Post('/new')
   createLocalUser(@Body() body: CreateLocalUserDto) {
     return this.userService.createlocal(body);
   }
+  @Post('/resend')
+  resend(@Body() body: Partial<CreateLocalUserDto>) {
+    return this.userService.resendOtp(body);
+  }
+
+  @Post('/verify')
+  verifyUser(@Body() body: any) {
+    return this.userService.verifyUserDetails(body);
+  }
+
   @Get()
   findAll() {
     return this.userService.findAll();
